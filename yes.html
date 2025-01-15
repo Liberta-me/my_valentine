@@ -33,7 +33,7 @@
         }
 
         .gif-container img {
-            max-width: 30%; /* Все гифки пропорционально уменьшаются */
+            max-width: 30%;
             height: auto;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -46,6 +46,20 @@
             pointer-events: none;
             z-index: -1;
         }
+
+        #sound-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #ff66cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            display: none; /* Скрываем, если музыка запустилась */
+        }
     </style>
 </head>
 <body>
@@ -57,53 +71,24 @@
         <img src="icegif-156.gif" alt="Excited gif">
     </div>
     <audio id="happy-audio" autoplay loop>
-        <source src="happyhappy.mp3" type="audio/mp3">
-
+        <source src="happyhappy.mp3" type="audio/mpeg">
+        Ваш браузер не поддерживает аудио.
     </audio>
+    <button id="sound-button">Включить звук</button>
     <script>
-        const canvas = document.getElementById('fireworks');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        const music = document.getElementById('happy-audio');
+        const soundButton = document.getElementById('sound-button');
 
-        function createHeart(x, y, size) {
-            ctx.beginPath();
-            ctx.moveTo(x, y);
-            ctx.bezierCurveTo(x, y - size / 2, x - size, y - size / 2, x - size, y);
-            ctx.bezierCurveTo(x - size, y + size, x, y + size * 1.5, x, y + size * 2);
-            ctx.bezierCurveTo(x, y + size * 1.5, x + size, y + size, x + size, y);
-            ctx.bezierCurveTo(x + size, y - size / 2, x, y - size / 2, x, y);
-            ctx.fillStyle = '#ff3333';
-            ctx.fill();
-        }
+        // Попытка автозапуска музыки
+        music.play().catch(() => {
+            soundButton.style.display = 'block'; // Показываем кнопку, если не получилось
+        });
 
-        function animateHearts() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            const hearts = Array.from({ length: 50 }, () => ({
-                x: Math.random() * canvas.width,
-                y: Math.random() * -canvas.height,
-                size: Math.random() * 15 + 10,
-                speed: Math.random() * 2 + 1,
-            }));
-
-            function drawHearts() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                hearts.forEach((heart) => {
-                    heart.y += heart.speed;
-                    if (heart.y > canvas.height) heart.y = -heart.size * 2;
-                    createHeart(heart.x, heart.y, heart.size);
-                });
-                requestAnimationFrame(drawHearts);
-            }
-
-            drawHearts();
-        }
-
-        animateHearts();
-
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+        // Запуск музыки при нажатии на кнопку
+        soundButton.addEventListener('click', () => {
+            music.play().then(() => {
+                soundButton.style.display = 'none'; // Убираем кнопку, если музыка запустилась
+            }).catch(err => console.log('Ошибка запуска аудио:', err));
         });
     </script>
 </body>
