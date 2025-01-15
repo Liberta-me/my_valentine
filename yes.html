@@ -58,7 +58,7 @@
             padding: 10px 20px;
             font-size: 1rem;
             cursor: pointer;
-            display: none; /* Скрываем, если музыка запустилась */
+            display: none;
         }
     </style>
 </head>
@@ -76,19 +76,63 @@
     </audio>
     <button id="sound-button">Включить звук</button>
     <script>
+        const canvas = document.getElementById('fireworks');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Создание сердечек
+        function createHeart(x, y, size) {
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.bezierCurveTo(x, y - size / 2, x - size, y - size / 2, x - size, y);
+            ctx.bezierCurveTo(x - size, y + size, x, y + size * 1.5, x, y + size * 2);
+            ctx.bezierCurveTo(x, y + size * 1.5, x + size, y + size, x + size, y);
+            ctx.bezierCurveTo(x + size, y - size / 2, x, y - size / 2, x, y);
+            ctx.fillStyle = '#ff3333';
+            ctx.fill();
+        }
+
+        function animateHearts() {
+            const hearts = Array.from({ length: 50 }, () => ({
+                x: Math.random() * canvas.width,
+                y: Math.random() * -canvas.height,
+                size: Math.random() * 15 + 10,
+                speed: Math.random() * 2 + 1,
+            }));
+
+            function drawHearts() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                hearts.forEach((heart) => {
+                    heart.y += heart.speed;
+                    if (heart.y > canvas.height) heart.y = -heart.size * 2;
+                    createHeart(heart.x, heart.y, heart.size);
+                });
+                requestAnimationFrame(drawHearts);
+            }
+
+            drawHearts();
+        }
+
+        animateHearts();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Аудио управление
         const music = document.getElementById('happy-audio');
         const soundButton = document.getElementById('sound-button');
 
-        // Попытка автозапуска музыки
         music.play().catch(() => {
-            soundButton.style.display = 'block'; // Показываем кнопку, если не получилось
+            soundButton.style.display = 'block'; // Показываем кнопку, если музыка не стартует
         });
 
-        // Запуск музыки при нажатии на кнопку
         soundButton.addEventListener('click', () => {
             music.play().then(() => {
-                soundButton.style.display = 'none'; // Убираем кнопку, если музыка запустилась
-            }).catch(err => console.log('Ошибка запуска аудио:', err));
+                soundButton.style.display = 'none'; // Скрываем кнопку, если музыка запустилась
+            }).catch(err => console.log('Ошибка запуска музыки:', err));
         });
     </script>
 </body>
