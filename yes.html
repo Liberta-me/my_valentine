@@ -19,24 +19,26 @@
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             color: #990099;
             margin-bottom: 20px;
+            padding: 0 10px; /* Добавлено для адаптации на телефоне */
         }
 
         .gif-container {
             display: flex;
-            flex-wrap: wrap;
+            flex-wrap: wrap; /* Для адаптации на маленьких экранах */
             justify-content: center;
             gap: 15px;
-            margin-top: 20px;
+            padding: 0 10px; /* Уменьшение отступов для телефонов */
         }
 
         .gif-container img {
-            width: 200px;
+            max-width: 90%; /* Адаптация под ширину экрана */
             height: auto;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
         }
 
         #fireworks {
@@ -52,8 +54,8 @@
     <canvas id="fireworks"></canvas>
     <h1>Юпиииии! Ты самая-самая лучшая, милаха ❤️</h1>
     <div class="gif-container">
-        <img src="happy-cat-happy-happy-cat.gif" alt="Cat gif">
         <img src="how-i-met-your-mother-himym.gif" alt="Celebration gif">
+        <img src="happy-cat-happy-happy-cat.gif" alt="Dancing cat gif">
         <img src="icegif-156.gif" alt="Excited gif">
     </div>
     <audio id="happy-audio" autoplay loop>
