@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
             confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
             confettiContainer.appendChild(confetti);
 
-            setTimeout(() => confetti.remove(), 5000);
+            setTimeout(() => confetti.remove(), 100000);
         }
     }
 
