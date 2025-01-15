@@ -48,7 +48,15 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     document.head.appendChild(style);
 
-    // Play background music
+    // Play background music with user interaction fallback
     const music = document.getElementById('background-music');
-    music.play().catch(error => console.log('Music autoplay failed:', error));
+    const playMusic = () => {
+        music.play().catch(error => console.log('Music autoplay failed:', error));
+    };
+
+    // Attempt to play on load
+    playMusic();
+
+    // Fallback: play music on user interaction
+    document.body.addEventListener('click', playMusic, { once: true });
 });
