@@ -33,7 +33,7 @@
         }
 
         .gif-container img {
-            max-width: 50%; /* Гифки занимают максимум половину экрана */
+            max-width: 50%;
             height: auto;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -62,6 +62,20 @@
             transform: scale(1.1);
             background-color: #ff33bb;
         }
+
+        #sound-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #ff66cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            display: none; /* Скрываем, если музыка запустилась */
+        }
     </style>
 </head>
 <body>
@@ -74,8 +88,25 @@
         <button onclick="location.href='yes.html'">Ладно, я согласна! (И я не вонючка!!)</button>
     </div>
     <audio id="sad-audio" autoplay loop>
-        <source src="sad.mp3" type="audio/mp3">
-
+        <source src="sad.mp3" type="audio/mpeg">
+        Ваш браузер не поддерживает аудио.
     </audio>
+    <button id="sound-button">Включить звук</button>
+    <script>
+        const music = document.getElementById('sad-audio');
+        const soundButton = document.getElementById('sound-button');
+
+        // Попытка автозапуска музыки
+        music.play().catch(() => {
+            soundButton.style.display = 'block'; // Показываем кнопку, если не получилось
+        });
+
+        // Запуск музыки при нажатии на кнопку
+        soundButton.addEventListener('click', () => {
+            music.play().then(() => {
+                soundButton.style.display = 'none'; // Убираем кнопку, если музыка запустилась
+            }).catch(err => console.log('Ошибка запуска аудио:', err));
+        });
+    </script>
 </body>
 </html>
