@@ -51,16 +51,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Play background music with user interaction fallback
     const music = document.getElementById('background-music');
     const playMusic = () => {
-        music.play();
+        music.play().catch(error => playMusic());
     };
 
     // Attempt to play on load
-    //playMusic();
-    
-    const once = {
-      once : true
-    };
-    
-    document.body.addEventListener('load', playMusic, once);
-});
+    playMusic();
 
+    // Fallback: play music on user interaction
+    //document.body.addEventListener('click', playMusic, { once: true });
+});
