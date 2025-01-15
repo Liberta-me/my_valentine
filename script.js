@@ -49,14 +49,34 @@ document.addEventListener('DOMContentLoaded', () => {
     document.head.appendChild(style);
 
     // Play background music with user interaction fallback
+    // Attempt to autoplay music with fallback button
     const music = document.getElementById('background-music');
-    const playMusic = () => {
-        music.play().catch(error => console.log('Music autoplay failed:', error));
-    };
+    music.play().then(() => {
+        console.log('Music started automatically');
+    }).catch(error => {
+        console.log('Autoplay failed:', error);
 
-    // Attempt to play on load
-    playMusic();
+        // Create a button to manually start music
+        const soundButton = document.createElement('button');
+        soundButton.textContent = 'Включить звук';
+        soundButton.style.position = 'fixed';
+        soundButton.style.bottom = '20px';
+        soundButton.style.right = '20px';
+        soundButton.style.backgroundColor = '#ff66cc';
+        soundButton.style.color = '#fff';
+        soundButton.style.border = 'none';
+        soundButton.style.padding = '10px 20px';
+        soundButton.style.borderRadius = '5px';
+        soundButton.style.cursor = 'pointer';
+        soundButton.style.fontSize = '1rem';
 
-    // Fallback: play music on user interaction
-    document.body.addEventListener('DOMContentLoaded', playMusic, { once: true });
+        document.body.appendChild(soundButton);
+
+        soundButton.addEventListener('click', () => {
+            music.play().then(() => {
+                console.log('Music started by user');
+                soundButton.remove(); // Remove button after music starts
+            }).catch(err => console.log('Error starting music:', err));
+        });
+    });
 });
