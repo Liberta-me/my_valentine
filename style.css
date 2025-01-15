@@ -1,10 +1,10 @@
 body {
-    background: linear-gradient(to bottom, #ffccff, #d9b3ff);
+    background: linear-gradient(to bottom, #e699e6, #b366cc);
     font-family: 'Arial', sans-serif;
     text-align: center;
     color: #333;
     margin: 0;
-    overflow-x: hidden;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -56,3 +56,4 @@ button:hover {
     pointer-events: none;
     z-index: 999;
 }
+
