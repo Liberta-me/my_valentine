@@ -5,20 +5,32 @@ body {
     color: #333;
     margin: 0;
     overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 .content {
-    margin-top: 100px;
+    max-width: 600px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     line-height: 1.5;
     color: #990099;
+    margin-bottom: 20px;
 }
 
 .buttons {
     margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
 }
 
 button {
@@ -28,7 +40,6 @@ button {
     border-radius: 5px;
     padding: 15px 30px;
     font-size: 1.2rem;
-    margin: 10px;
     cursor: pointer;
     transition: transform 0.2s;
 }
