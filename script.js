@@ -48,15 +48,12 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     document.head.appendChild(style);
 
-    // Play background music with user interaction fallback
+    // Attempt to autoplay music
     const music = document.getElementById('background-music');
-    const playMusic = () => {
-        music.play().catch(error => console.log('Music autoplay failed:', error));
-    };
-
-    // Attempt to play on load
-    playMusic();
-
-    // Fallback: play music on user interaction
-    document.body.addEventListener('click', playMusic, { once: true });
+    music.play().then(() => {
+        console.log('Music started automatically');
+    }).catch(error => {
+        console.log('Autoplay failed:', error);
+        alert('Для полного погружения в атмосферу включите звук!');
+    });
 });
