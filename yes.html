@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ты не вонючка!</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background: linear-gradient(to bottom, #d9b3ff, #ffccff);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #990099;
+            margin-bottom: 20px;
+        }
+
+        .gif-container img {
+            width: 250px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        button {
+            background-color: #ff66cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 15px 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            background-color: #ff33bb;
+        }
+    </style>
+</head>
+<body>
+    <div class="gif-container">
+        <img src="crying.gif" alt="Crying gif">
+    </div>
+    <h1>😢 Чё? Ты вообще-то не вонючка, не обзывай себя...<br> Ну ладно, я не могу тебя заставить, но может быть всё-таки передумаешь? 👀</h1>
+    <div class="buttons">
+        <button onclick="location.href='yes.html'">Ладно, я согласна! (Но я всё равно вонючка)</button>
+        <button onclick="location.href='yes.html'">Ладно, я согласна! (И я не вонючка!!)</button>
+    </div>
+</body>
+</html>
