@@ -55,9 +55,12 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Attempt to play on load
-    playMusic();
-
-    // Fallback: play music on user interaction
-    document.body.addEventListener('load', playMusic, { once: true });
+    //playMusic();
+    
+    const once = {
+      once : true
+    };
+    
+    document.body.addEventListener('load', playMusic, once);
 });
 
