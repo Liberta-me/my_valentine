@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
             confetti.className = 'confetti';
             confetti.style.left = Math.random() * 100 + 'vw';
             confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+            confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
             confettiContainer.appendChild(confetti);
 
             setTimeout(() => confetti.remove(), 5000);
@@ -33,9 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
             position: absolute;
             width: 10px;
             height: 10px;
-            background-color: hsl(${Math.random() * 360}, 100%, 50%);
+            background-color: red;
             opacity: 0.7;
-            animation: fall linear;
+            animation: fall linear infinite;
         }
 
         @keyframes fall {
@@ -46,4 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     `;
     document.head.appendChild(style);
+
+    // Play background music
+    const music = document.getElementById('background-music');
+    music.play().catch(error => console.log('Music autoplay failed:', error));
 });
