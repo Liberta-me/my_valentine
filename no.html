@@ -15,12 +15,14 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            overflow: hidden;
         }
 
         h1 {
-            font-size: 2rem;
+            font-size: 1.5rem;
             color: #990099;
             margin-bottom: 20px;
+            padding: 0 10px; /* Добавлено для адаптации на телефоне */
         }
 
         .gif-container {
@@ -28,10 +30,11 @@
             flex-wrap: wrap; /* Для адаптации на маленьких экранах */
             justify-content: center;
             gap: 15px;
+            padding: 0 10px; /* Уменьшение отступов для телефонов */
         }
 
         .gif-container img {
-            max-width: 100%; /* Адаптация по ширине экрана */
+            max-width: 90%; /* Адаптация под ширину экрана */
             height: auto;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -41,8 +44,10 @@
         .buttons {
             margin-top: 20px;
             display: flex;
+            flex-wrap: wrap; /* Кнопки переходят на новую строку при необходимости */
             justify-content: center;
             gap: 15px;
+            padding: 0 10px; /* Уменьшение отступов для телефонов */
         }
 
         button {
@@ -50,8 +55,8 @@
             color: white;
             border: none;
             border-radius: 5px;
-            padding: 15px 30px;
-            font-size: 1rem;
+            padding: 10px 20px; /* Уменьшено для мобильных устройств */
+            font-size: 0.9rem; /* Уменьшено для телефонов */
             cursor: pointer;
             transition: transform 0.2s;
         }
@@ -73,6 +78,7 @@
     </div>
     <audio id="sad-audio" autoplay loop>
         <source src="sad.mp3" type="audio/mpeg">
+        Ваш браузер не поддерживает аудио.
     </audio>
 </body>
 </html>
