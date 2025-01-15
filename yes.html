@@ -61,41 +61,47 @@
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-
-        function createFirework() {
-            const colors = ['#ff6666', '#ffcc66', '#66ccff', '#cc66ff'];
-            const x = Math.random() * canvas.width;
-            const y = Math.random() * canvas.height / 2;
-            const size = Math.random() * 3 + 2;
-            const color = colors[Math.floor(Math.random() * colors.length)];
-
-            for (let i = 0; i < 50; i++) {
-                const angle = (Math.PI * 2) / 50 * i;
-                const velocity = Math.random() * 2 + 1;
-                const dx = Math.cos(angle) * velocity;
-                const dy = Math.sin(angle) * velocity;
-
-                setTimeout(() => {
-                    ctx.beginPath();
-                    ctx.arc(x + dx * 10, y + dy * 10, size, 0, Math.PI * 2);
-                    ctx.fillStyle = color;
-                    ctx.fill();
-                }, i * 10);
-            }
+    
+        function createHeart(x, y, size) {
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.bezierCurveTo(x, y - size / 2, x - size, y - size / 2, x - size, y);
+            ctx.bezierCurveTo(x - size, y + size, x, y + size * 1.5, x, y + size * 2);
+            ctx.bezierCurveTo(x, y + size * 1.5, x + size, y + size, x + size, y);
+            ctx.bezierCurveTo(x + size, y - size / 2, x, y - size / 2, x, y);
+            ctx.fillStyle = '#ff3333';
+            ctx.fill();
         }
-
-        function animateFireworks() {
+    
+        function animateHearts() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            createFirework();
-            setTimeout(animateFireworks, 1000);
+            const hearts = Array.from({ length: 50 }, () => ({
+                x: Math.random() * canvas.width,
+                y: Math.random() * -canvas.height,
+                size: Math.random() * 15 + 10,
+                speed: Math.random() * 2 + 1,
+            }));
+    
+            function drawHearts() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                hearts.forEach((heart) => {
+                    heart.y += heart.speed;
+                    if (heart.y > canvas.height) heart.y = -heart.size * 2;
+                    createHeart(heart.x, heart.y, heart.size);
+                });
+                requestAnimationFrame(drawHearts);
+            }
+    
+            drawHearts();
         }
-
-        animateFireworks();
-
+    
+        animateHearts();
+    
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         });
     </script>
+
 </body>
 </html>
