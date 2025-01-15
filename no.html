@@ -23,8 +23,15 @@
             margin-bottom: 20px;
         }
 
+        .gif-container {
+            display: flex;
+            flex-wrap: wrap; /* Для адаптации на маленьких экранах */
+            justify-content: center;
+            gap: 15px;
+        }
+
         .gif-container img {
-            width: 250px;
+            max-width: 100%; /* Адаптация по ширине экрана */
             height: auto;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -64,5 +71,8 @@
         <button onclick="location.href='yes.html'">Ладно, я согласна! (Но я всё равно вонючка)</button>
         <button onclick="location.href='yes.html'">Ладно, я согласна! (И я не вонючка!!)</button>
     </div>
+    <audio id="sad-audio" autoplay loop>
+        <source src="sad.mp3" type="audio/mpeg">
+    </audio>
 </body>
 </html>
