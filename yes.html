@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ты не вонючка!</title>
+    <title>Юпиииии!</title>
     <link rel="stylesheet" href="style.css">
     <style>
         body {
-            background: linear-gradient(to bottom, #d9b3ff, #ffccff);
+            background: linear-gradient(to bottom, #ffccff, #d9b3ff);
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -15,10 +15,11 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            overflow: hidden;
         }
 
         h1 {
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: #990099;
             margin-bottom: 20px;
         }
@@ -28,53 +29,82 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 15px;
+            margin-top: 20px;
         }
 
         .gif-container img {
-            max-width: 100%;
+            width: 200px;
             height: auto;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
         }
 
-        .buttons {
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        button {
-            background-color: #ff66cc;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 15px 30px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        button:hover {
-            transform: scale(1.1);
-            background-color: #ff33bb;
+        #fireworks {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
         }
     </style>
 </head>
 <body>
+    <canvas id="fireworks"></canvas>
+    <h1>Юпиииии! Ты самая-самая лучшая, милаха ❤️</h1>
     <div class="gif-container">
-        <img src="crying.gif" alt="Crying gif">
+        <img src="happy-cat-happy-happy-cat.gif" alt="Cat gif">
+        <img src="how-i-met-your-mother-himym.gif" alt="Celebration gif">
+        <img src="icegif-156.gif" alt="Excited gif">
     </div>
-    <h1>😢 Чё? Ты вообще-то не вонючка, не обзывай себя...<br> Ну ладно, я не могу тебя заставить, но может быть всё-таки передумаешь? 👀</h1>
-    <div class="buttons">
-        <button onclick="location.href='yes.html'">Ладно, я согласна! (Но я всё равно вонючка)</button>
-        <button onclick="location.href='yes.html'">Ладно, я согласна! (И я не вонючка!!)</button>
-    </div>
-    <audio id="sad-audio" autoplay loop>
-        <source src="sad.mp3" type="audio/mpeg">
-
+    <audio id="happy-audio" autoplay loop>
+        <source src="happyhappy.mp3" type="audio/mpeg">
+        Ваш браузер не поддерживает аудио.
     </audio>
+    <script>
+        const canvas = document.getElementById('fireworks');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        function createHeart(x, y, size) {
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.bezierCurveTo(x, y - size / 2, x - size, y - size / 2, x - size, y);
+            ctx.bezierCurveTo(x - size, y + size, x, y + size * 1.5, x, y + size * 2);
+            ctx.bezierCurveTo(x, y + size * 1.5, x + size, y + size, x + size, y);
+            ctx.bezierCurveTo(x + size, y - size / 2, x, y - size / 2, x, y);
+            ctx.fillStyle = '#ff3333';
+            ctx.fill();
+        }
+
+        function animateHearts() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const hearts = Array.from({ length: 50 }, () => ({
+                x: Math.random() * canvas.width,
+                y: Math.random() * -canvas.height,
+                size: Math.random() * 15 + 10,
+                speed: Math.random() * 2 + 1,
+            }));
+
+            function drawHearts() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                hearts.forEach((heart) => {
+                    heart.y += heart.speed;
+                    if (heart.y > canvas.height) heart.y = -heart.size * 2;
+                    createHeart(heart.x, heart.y, heart.size);
+                });
+                requestAnimationFrame(drawHearts);
+            }
+
+            drawHearts();
+        }
+
+        animateHearts();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
 </body>
 </html>
-
